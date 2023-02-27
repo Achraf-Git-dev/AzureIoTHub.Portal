@@ -16,7 +16,10 @@ namespace AzureIoTHub.Portal.Tests.E2E
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+            driver = new ChromeDriver("/usr/local/bin", options);
         }
 
         [Test]

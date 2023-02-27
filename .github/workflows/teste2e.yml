@@ -26,20 +26,20 @@ jobs:
 
     - name: Restore NuGet packages
       run: dotnet restore
-      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
       
     - name: Install NUnit
       run: dotnet add package NUnit
-      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
       
     - name: Install Selenium NuGet package
       run: dotnet add package Selenium.WebDriver
-      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
     
     - name: Install Chrome Driver
       run: dotnet add package Selenium.WebDriver.ChromeDriver
-      working-directory: AzureIoTHub.Portal.Tests.E2E/ 
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/ 
 
     - name: Run E2E tests
       run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
-      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/

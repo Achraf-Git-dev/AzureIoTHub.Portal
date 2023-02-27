@@ -1,0 +1,45 @@
+name: Test_E2E
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build & Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3.3.0
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore Dotnet tools
+      run: dotnet tool restore
+      working-directory: src/
+      
+    - name: Restore dependencies
+      run: dotnet restore AzureIoTHub.Portal.sln 
+      working-directory: src/
+
+    - name: Restore NuGet packages
+      run: dotnet restore
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install NUnit
+      run: dotnet add package NUnit
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install Selenium NuGet package
+      run: dotnet add package Selenium.WebDriver
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
+    
+    - name: Install Chrome Driver
+      run: dotnet add package Selenium.WebDriver.ChromeDriver
+      working-directory: AzureIoTHub.Portal.Tests.E2E/ 
+
+    - name: Run E2E tests
+      run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
+      working-directory: AzureIoTHub.Portal.Tests.E2E/

@@ -11,6 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
     
+    - name: Install Chrome Driver
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+        sudo apt-get update
+        sudo apt-get install google-chrome-stable
+        LATEST_CHROMEDRIVER=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+        wget -q -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER}/chromedriver_linux64.zip"
+        sudo unzip -q /tmp/chromedriver.zip -d /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+    
     - name: Install Chrome
       run: sudo apt-get install google-chrome-stable
       
@@ -55,7 +66,7 @@ jobs:
       run: dotnet add package Selenium.WebDriver.ChromeDriver
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
       
-    - name: Build test project
+    - name: Build E2E test project
       run: dotnet build AzureIoTHub.Portal.Tests.E2E.csproj
       working-directory: src/AzureIoTHub.Portal.Tests.E2E
       

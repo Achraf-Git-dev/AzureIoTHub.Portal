@@ -11,6 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
     
+    - name: Install Chrome
+      run: sudo apt-get install google-chrome-stable
+      
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -27,7 +30,7 @@ jobs:
     - name: Restore NuGet packages
       run: dotnet restore
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
-      
+    
     - name: Install NUnit
       run: dotnet add package NUnit
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/

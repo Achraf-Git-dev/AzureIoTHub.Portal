@@ -18,10 +18,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-        
-    - name: Install SDK
-      run: dotnet add package Microsoft.NET.Test.Sdk
-      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
 
     - name: Restore Dotnet tools
       run: dotnet tool restore
@@ -33,6 +29,14 @@ jobs:
 
     - name: Restore NuGet packages
       run: dotnet restore
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
+    
+    - name: Install SDK
+      run: dotnet add package Microsoft.NET.Test.Sdk
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install NUnit Adapter
+      run: dotnet add package NUnit3TestAdapter
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
     
     - name: Install NUnit

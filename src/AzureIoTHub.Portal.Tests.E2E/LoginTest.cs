@@ -16,7 +16,7 @@ namespace AzureIoTHub.Portal.Tests.E2E
         [SetUp]
         public void SetUp()
         {
-            ChromeOptions options = new ChromeOptions();
+            var options = new ChromeOptions();
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
             options.AddArgument("headless");

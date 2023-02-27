@@ -38,6 +38,10 @@ jobs:
     - name: Install Selenium NuGet package
       run: dotnet add package Selenium.WebDriver
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install Selenium Support NuGet package
+      run: dotnet add package Selenium.Support
+      working-directory: src/AzureIoTHub.Portal.Tests.E2E/
     
     - name: Install Chrome Driver
       run: dotnet add package Selenium.WebDriver.ChromeDriver

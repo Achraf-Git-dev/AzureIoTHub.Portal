@@ -51,6 +51,12 @@ jobs:
       run: dotnet add package Selenium.WebDriver.ChromeDriver
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
       
+    - name: Build test project
+      run: dotnet build AzureIoTHub.Portal.Tests.E2E.csproj
+
+    - name: Run end-to-end tests
+      run: dotnet test AzureIoTHub.Portal.Tests.E2E.csproj --no-build
+      
     - name: Run E2E tests
       run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
       working-directory: src/AzureIoTHub.Portal.Tests.E2E/
